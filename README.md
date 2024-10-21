@@ -41,28 +41,34 @@ Enter the following search query to retrieve DNS events:
 ```
 index=* sourcetype=dns_sample
 ```
+
 ### 2. Extract Relevant Fields
 Identify key fields in DNS logs such as source IP, destination IP, domain name, query type, response code, etc.
 Example extraction command:
 ```
 index=* sourcetype=dns_sample | regex _raw="(?i)\b(dns|domain|query|response|port 53)\b"
 ```
+
 ### 3. Identify Anomalies
 Look for unusual patterns or anomalies in DNS activity.
 Example query to identify spikes:
 ```
 index=* sourcetype=dns_sample | stats count by fqdn
 ```
+
 ### 4. Find the Top DNS Sources
 Use the top command to count the occurrences of each query type:
 ```
 index=* sourcetype=dns_sample | top fqdn, src_ip
 ```
+
 ### 5. Investigate Suspicious Domains
 Search for domains associated with known malicious activity or suspicious behavior.
 Example search for known malicious domains:
 ```
 index=* sourcetype=dns_sample fqdn="maliciousdomain.com"
 ```
+
+
 ## Conclusion
 Analyzing DNS log files using Splunk SIEM enables security professionals to detect and respond to potential security incidents effectively. By understanding DNS activity and identifying anomalies, organizations can enhance their overall security posture and protect against various cyber threats.
